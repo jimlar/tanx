@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="JimIRC" default="jimirc" basedir=".">
+<project name="Tanx" default="tanx" basedir=".">
 
 
   <property name="build.compiler" value="jikes" />
@@ -25,13 +25,13 @@
   </target>
 
   <!-- jimirc -->
-  <target name="jimirc" depends="compile">
+  <target name="tanx" depends="compile">
 
-    <jar jarfile="build/jimirc.jar"
-         manifest="src/META-INF/MANIFEST.MF">
-
-         <fileset dir="build/classes" includes="**/*.class"/>
+    <jar jarfile="build/tanx.jar">
+      <manifest>
+        <attribute name="Main-Class" value="tanx.Main"/>
+      </manifest>
+      <fileset dir="build/classes" includes="**/*.class"/>
     </jar>
   </target>
-
 </project>
