@@ -1,7 +1,7 @@
 package tanx;
 
 import tanx.model.*;
-import tanx.ui.TanxFrame;
+import tanx.view.TanxFrame;
 
 public class Main {
     public static void main(String args[]) throws Exception {

@@ -1,4 +1,4 @@
-package tanx.ui;
+package tanx.view;
 
 import tanx.model.*;
 
@@ -10,7 +10,7 @@ public class TanxFrame extends JFrame {
     public TanxFrame(final GameMap map) {
         super("Tanx");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().add(new GameCanvas(map));
+        getContentPane().add(new MapView(map));
 
         pack();
 

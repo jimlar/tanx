@@ -1,12 +1,8 @@
 package tanx.model;
 
-import java.awt.*;
 import java.util.*;
 
 public class GameMap {
-    /* The pixel size of a map block (both x and y ways) */
-    public static final int MAP_BLOCK_SIZE = 10;
-
     private static final MapBlock r = new MapBlock(MapBlock.TYPE_ROAD);
     private static final MapBlock w = new MapBlock(MapBlock.TYPE_WALL);
 
@@ -74,50 +70,16 @@ public class GameMap {
         return BLOCKS.length;
     }
 
-    public int getPixelHeight() {
-        return getHeight() * MAP_BLOCK_SIZE;
-    }
-
-    public int getPixelWidth() {
-        return getWidth() * MAP_BLOCK_SIZE;
-    }
-
     public int getWidth() {
         return BLOCKS[0].length;
     }
 
-    public void paint(Graphics g) {
-        paintBackground(g);
-        paintObjects(g);
+    public MapBlock getBlockAt(int x, int y) {
+        return BLOCKS[y][x];
     }
 
     private synchronized Integer getNextObjectId() {
         return new Integer(nextObjectId++);
-    }
-
-    private void paintBackground(Graphics g) {
-
-        for (int y = 0; y < BLOCKS.length; y++) {
-            for (int x = 0; x < BLOCKS[y].length; x++) {
-                if (BLOCKS[y][x].getType() == MapBlock.TYPE_WALL) {
-                    g.setColor(Color.black);
-                } else {
-                    g.setColor(Color.white);
-                }
-
-                g.fillRect(x * MAP_BLOCK_SIZE,
-                           y * MAP_BLOCK_SIZE,
-                           (x + 1) * MAP_BLOCK_SIZE,
-                           (y + 1) * MAP_BLOCK_SIZE);
-            }
-        }
-    }
-
-    private void paintObjects(Graphics g) {
-        for (Iterator i = objectsById.values().iterator(); i.hasNext();) {
-            GameObject gameObject = (GameObject) i.next();
-            gameObject.paint(g);
-        }
     }
 
     protected boolean isVisitablePosition(int x, int y) {
@@ -154,5 +116,9 @@ public class GameMap {
             throw new IllegalArgumentException("no object with id " + id);
         }
         return object;
+    }
+
+    public Collection getObjects() {
+        return objectsById.values();
     }
 }

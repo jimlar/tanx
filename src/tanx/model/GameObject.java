@@ -1,6 +1,5 @@
 package tanx.model;
 
-import java.awt.*;
 
 public abstract class GameObject {
     /**
@@ -9,11 +8,6 @@ public abstract class GameObject {
     private Integer id;
     private GameMap map;
     private MapPosition position = new MapPosition(0, 0);
-
-    /**
-     * Implement to paint this object
-     */
-    protected abstract void paint(Graphics g);
 
     /**
      * Implements a default action behaviour
@@ -61,7 +55,7 @@ public abstract class GameObject {
         this.id = id;
     }
 
-    protected MapPosition getMapPosition() {
+    public MapPosition getMapPosition() {
         return this.position;
     }
 

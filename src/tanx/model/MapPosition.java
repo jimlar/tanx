@@ -1,5 +1,7 @@
 package tanx.model;
 
+import tanx.view.MapView;
+
 public class MapPosition {
     private int x;
     private int y;
@@ -18,10 +20,10 @@ public class MapPosition {
     }
 
     public int getPixelX() {
-        return this.x * GameMap.MAP_BLOCK_SIZE;
+        return this.x * MapView.MAP_BLOCK_SIZE;
     }
 
     public int getPixelY() {
-        return this.y * GameMap.MAP_BLOCK_SIZE;
+        return this.y * MapView.MAP_BLOCK_SIZE;
     }
 }
