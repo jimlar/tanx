@@ -22,7 +22,7 @@ public class Service extends Thread implements MapChangeListener {
         this.map.add(clientTank);
     }
 
-    public void mapChanged(MapChangedEvent event) {
+    public synchronized void mapChanged(MapChangedEvent event) {
         try {
             output.writeObject(event);
             output.flush();
@@ -37,11 +37,7 @@ public class Service extends Thread implements MapChangeListener {
             ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
             while (true) {
                 Command command = (Command) input.readObject();
-
-                if (command instanceof MoveCommand) {
-                    MoveCommand moveCommand = (MoveCommand) command;
-                    moveCommand.setTarget(clientTank);
-                }
+                command.setTarget(clientTank);
                 map.execute(command);
             }
         } catch (IOException e) {

@@ -34,7 +34,7 @@ public class TanxFrame extends JFrame {
                         e.consume();
                         break;
                     case KeyEvent.VK_SPACE:
-                        //map.focusedObject.action();
+                        map.execute(new ActionCommand());
                         e.consume();
                         break;
                 }

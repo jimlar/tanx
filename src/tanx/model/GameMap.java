@@ -50,8 +50,10 @@ public class GameMap {
             MoveCommand moveCommand = (MoveCommand) command;
             boolean result = moveCommand.getTarget(this).move(moveCommand.getDirection());
             if (result) {
-             fireMovedEvent(moveCommand.getTarget(this), moveCommand.getDirection());
+                fireMovedEvent(moveCommand.getTarget(this), moveCommand.getDirection());
             }
+        } else if (command instanceof ActionCommand) {
+            command.getTarget(this).action();
         }
     }
 

@@ -49,11 +49,11 @@ public abstract class GameObject implements Serializable {
         return true;
     }
 
-    protected Integer getId() {
+    public Integer getId() {
         return id;
     }
 
-    protected void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

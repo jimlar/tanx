@@ -18,7 +18,7 @@ public class Connection {
         this.out = new ObjectOutputStream(this.socket.getOutputStream());
     }
 
-    protected void send(Command command) throws IOException {
+    protected synchronized void send(Command command) throws IOException {
         out.writeObject(command);
         out.flush();
         out.reset();

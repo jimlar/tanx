@@ -11,6 +11,15 @@ public class ClientMap extends GameMap {
         this.connection = new Connection(this, host, port);
     }
 
+    /**
+     * Preserves the objects id
+     */
+    public void add(GameObject object) {
+        Integer id = object.getId();
+        super.add(object);
+        object.setId(id);
+    }
+
     public void executeLocal(Command command) {
         super.execute(command);
     }
