@@ -1,16 +1,39 @@
 package tanx.model;
 
 import java.awt.*;
+import java.util.Random;
 
-public class Tank extends GameObject {
+public class RobotTank extends GameObject implements Runnable {
+    private static final int MILLIS_PER_BLOCK = 100;
     private static final int WIDTH = GameMap.MAP_BLOCK_SIZE;
     private static final int HEIGHT = GameMap.MAP_BLOCK_SIZE;
     private static final int CANNON_LENGTH = GameMap.MAP_BLOCK_SIZE;
 
-    private int facingDirection = DIRECTION_RIGHT;
+    private Random random;
+    private int facingDirection;
 
-    public Tank(MapPosition position) {
+    public RobotTank(MapPosition position) {
         setMapPosition(position);
+        this.random = new Random();
+        this.facingDirection = DIRECTION_RIGHT;
+        Thread thread = new Thread(this);
+        thread.start();
+    }
+
+    public void run() {
+        try {
+            while (true) {
+                Thread.sleep(MILLIS_PER_BLOCK);
+                while (!canMove(facingDirection)) {
+                    facingDirection = getNewRandomDirection(facingDirection);
+                }
+
+                move(facingDirection);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Robot tank thread interrupted");
+        }
+        map.remove(this);
     }
 
     public void action() {
@@ -28,14 +51,13 @@ public class Tank extends GameObject {
     }
 
     public void paint(Graphics g) {
-        g.setColor(Color.red);
+        g.setColor(Color.green);
         g.fillRect(position.getPixelX(),
                    position.getPixelY(),
                    WIDTH,
                    HEIGHT);
 
         paintCannon(g);
-
     }
 
     private void paintCannon(Graphics g) {
@@ -62,5 +84,27 @@ public class Tank extends GameObject {
                    cannonY1,
                    cannonX2,
                    cannonY2);
+    }
+
+    private int getNewRandomDirection(int oldDirection) {
+        int newDirection = oldDirection;
+
+        while (newDirection == oldDirection) {
+            switch (random.nextInt(4)) {
+                case 0:
+                    newDirection = DIRECTION_DOWN;
+                    break;
+                case 1:
+                    newDirection = DIRECTION_UP;
+                    break;
+                case 2:
+                    newDirection = DIRECTION_LEFT;
+                    break;
+                case 3:
+                    newDirection = DIRECTION_RIGHT;
+                    break;
+            }
+        }
+        return newDirection;
     }
 }

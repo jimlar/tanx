@@ -29,6 +29,7 @@ public class Shot extends GameObject implements Runnable {
     }
 
     public void paint(Graphics g) {
+        g.setColor(Color.red);
         int x1 = position.getPixelX() + (GameMap.MAP_BLOCK_SIZE / 2);
         int y1 = position.getPixelY() + (GameMap.MAP_BLOCK_SIZE / 2);
         int x2 = x1;
