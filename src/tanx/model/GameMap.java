@@ -48,6 +48,10 @@ public class GameMap implements MoveListener {
         fireRemovedEvent(object);
     }
 
+    public CommandResponse execute(Command command) {
+        return new CommandResponse();
+    }
+
     public boolean canMove(GameObject object, int direction) {
 
         int destX = object.getMapPosition().getX();
