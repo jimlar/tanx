@@ -5,12 +5,11 @@ import tanx.model.GameObject;
 import tanx.model.MoveListener;
 
 import java.awt.*;
-import java.util.Iterator;
 
 public class GameCanvas extends Canvas implements MoveListener {
     private GameMap map;
 
-    public GameCanvas(GameMap map) {
+    public GameCanvas(final GameMap map) {
         this.map = map;
         map.addMoveListener(this);
     }

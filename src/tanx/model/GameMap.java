@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.awt.*;
 
 public class GameMap extends GameObject implements MoveListener {
+    /* this is the object which has input focus */
+    private GameObject focusedObject;
     private List objects = new ArrayList();
 
     public void add(GameObject object) {
@@ -15,6 +17,14 @@ public class GameMap extends GameObject implements MoveListener {
 
     public List getObjects() {
         return objects;
+    }
+
+    public GameObject getFocusedObject() {
+        return this.focusedObject;
+    }
+
+    public void setFocusedObject(GameObject focusedObject) {
+        this.focusedObject = focusedObject;
     }
 
     public void paint(Graphics g) {
