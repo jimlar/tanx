@@ -1,28 +1,28 @@
 package tanx.model;
 
+import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.awt.*;
 
 public class GameMap implements MoveListener {
     /* The pixel size of a map block (both x and y ways) */
     public static final int MAP_BLOCK_SIZE = 10;
 
     private static final int BACKGROUND[][] = {
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1 },
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
     private Set mapChangeListeners = new HashSet();
 
@@ -48,30 +48,12 @@ public class GameMap implements MoveListener {
         fireRemovedEvent(object);
     }
 
-    public CommandResponse execute(Command command) {
-        return new CommandResponse();
-    }
-
-    public boolean canMove(GameObject object, int direction) {
-
-        int destX = object.getMapPosition().getX();
-        int destY = object.getMapPosition().getY();
-
-        switch (direction) {
-            case GameObject.DIRECTION_DOWN:
-                destY++;
-                break;
-            case GameObject.DIRECTION_UP:
-                destY--;
-                break;
-            case GameObject.DIRECTION_LEFT:
-                destX--;
-                break;
-            case GameObject.DIRECTION_RIGHT:
-                destX++;
-                break;
+    public boolean execute(Command command) {
+        if (command instanceof MoveCommand) {
+            MoveCommand moveCommand = (MoveCommand) command;
+            return moveCommand.getTarget().move(moveCommand.getDirection());
         }
-        return isVisitablePosition(destX, destY);
+        return false;
     }
 
     public List getObjects() {
@@ -150,6 +132,13 @@ public class GameMap implements MoveListener {
         fireMovedEvent(object, direction, oldPosition);
     }
 
+    protected boolean isVisitablePosition(int x, int y) {
+        if (x < 0 || y < 0 || y >= BACKGROUND.length || x >= BACKGROUND[0].length) {
+            return false;
+        }
+        return BACKGROUND[y][x] == 0;
+    }
+
     private void fireMovedEvent(GameObject object, int direction, MapPosition oldPosition) {
         for (Iterator i = mapChangeListeners.iterator(); i.hasNext();) {
             MapChangeListener listener = (MapChangeListener) i.next();
@@ -169,12 +158,5 @@ public class GameMap implements MoveListener {
             MapChangeListener listener = (MapChangeListener) i.next();
             listener.added(object);
         }
-    }
-
-    private boolean isVisitablePosition(int x, int y) {
-        if (x < 0 || y < 0 || y >= BACKGROUND.length || x >= BACKGROUND[0].length) {
-            return false;
-        }
-        return BACKGROUND[y][x] == 0;
     }
 }

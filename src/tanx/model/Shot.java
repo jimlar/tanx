@@ -18,9 +18,9 @@ public class Shot extends GameObject implements Runnable {
     public void run() {
         try {
             boolean destroyed = false;
-            while(!destroyed) {
+            while (!destroyed) {
                 Thread.sleep(MILLIS_PER_BLOCK);
-                destroyed = !move(direction);
+                destroyed = !map.execute(new MoveCommand(this, direction));
             }
         } catch (InterruptedException e) {
             System.out.println("Shot thread interrupted");
@@ -30,22 +30,22 @@ public class Shot extends GameObject implements Runnable {
 
     public void paint(Graphics g) {
         g.setColor(Color.red);
-        int x1 = position.getPixelX() + (GameMap.MAP_BLOCK_SIZE / 2);
-        int y1 = position.getPixelY() + (GameMap.MAP_BLOCK_SIZE / 2);
+        int x1 = getMapPosition().getPixelX() + (GameMap.MAP_BLOCK_SIZE / 2);
+        int y1 = getMapPosition().getPixelY() + (GameMap.MAP_BLOCK_SIZE / 2);
         int x2 = x1;
         int y2 = y1;
 
         switch (direction) {
-            case DIRECTION_DOWN:
+            case MoveCommand.DIRECTION_DOWN:
                 y2 += LENGTH;
                 break;
-            case DIRECTION_UP:
+            case MoveCommand.DIRECTION_UP:
                 y2 -= LENGTH;
                 break;
-            case DIRECTION_LEFT:
+            case MoveCommand.DIRECTION_LEFT:
                 x2 -= LENGTH;
                 break;
-            case DIRECTION_RIGHT:
+            case MoveCommand.DIRECTION_RIGHT:
                 x2 += LENGTH;
                 break;
         }

@@ -1,16 +1,9 @@
 package tanx.model;
 
 import java.awt.*;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 public abstract class GameObject {
-    public static final int DIRECTION_UP = 0;
-    public static final int DIRECTION_DOWN = 1;
-    public static final int DIRECTION_LEFT = 2;
-    public static final int DIRECTION_RIGHT = 3;
-
     private Set moveListeners = new HashSet();
     protected GameMap map;
     protected MapPosition position = new MapPosition(0, 0);
@@ -38,12 +31,7 @@ public abstract class GameObject {
     public void action() {
     }
 
-    /**
-     * ask if you can go a direction
-     */
-    public boolean canMove(int direction) {
-        return map.canMove(this, direction);
-    }
+    protected abstract void paint(Graphics g);
 
     /**
      * Implements a default move behaviour
@@ -52,23 +40,23 @@ public abstract class GameObject {
      *
      * @return true if the move was successful, false otherwise (obstacles)
      */
-    public boolean move(int direction) {
+    protected boolean move(int direction) {
         if (!canMove(direction)) {
             return false;
         }
 
         MapPosition oldPosition = this.position;
         switch (direction) {
-            case DIRECTION_UP:
+            case MoveCommand.DIRECTION_UP:
                 this.position = new MapPosition(position.getX(), position.getY() - 1);
                 break;
-            case DIRECTION_DOWN:
+            case MoveCommand.DIRECTION_DOWN:
                 this.position = new MapPosition(position.getX(), position.getY() + 1);
                 break;
-            case DIRECTION_LEFT:
+            case MoveCommand.DIRECTION_LEFT:
                 this.position = new MapPosition(position.getX() - 1, position.getY());
                 break;
-            case DIRECTION_RIGHT:
+            case MoveCommand.DIRECTION_RIGHT:
                 this.position = new MapPosition(position.getX() + 1, position.getY());
                 break;
             default:
@@ -77,8 +65,6 @@ public abstract class GameObject {
         fireMovedEvent(this, direction, oldPosition);
         return true;
     }
-
-    public abstract void paint(Graphics g);
 
     protected void fireMovedEvent(GameObject gameObject, int direction, MapPosition oldPosition) {
         for (Iterator i = moveListeners.iterator(); i.hasNext();) {
@@ -89,5 +75,30 @@ public abstract class GameObject {
 
     protected void setMap(GameMap map) {
         this.map = map;
+    }
+
+    /**
+     * ask if you can go a direction
+     */
+    private boolean canMove(int direction) {
+
+        int destX = getMapPosition().getX();
+        int destY = getMapPosition().getY();
+
+        switch (direction) {
+            case MoveCommand.DIRECTION_DOWN:
+                destY++;
+                break;
+            case MoveCommand.DIRECTION_UP:
+                destY--;
+                break;
+            case MoveCommand.DIRECTION_LEFT:
+                destX--;
+                break;
+            case MoveCommand.DIRECTION_RIGHT:
+                destX++;
+                break;
+        }
+        return map.isVisitablePosition(destX, destY);
     }
 }

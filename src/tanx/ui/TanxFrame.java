@@ -1,7 +1,6 @@
 package tanx.ui;
 
-import tanx.model.GameMap;
-import tanx.model.GameObject;
+import tanx.model.*;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -21,19 +20,19 @@ public class TanxFrame extends JFrame {
                 if (focusedObject != null) {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_DOWN:
-                            focusedObject.move(GameObject.DIRECTION_DOWN);
+                            map.execute(new MoveCommand(focusedObject, MoveCommand.DIRECTION_DOWN));
                             e.consume();
                             break;
                         case KeyEvent.VK_UP:
-                            focusedObject.move(GameObject.DIRECTION_UP);
+                            map.execute(new MoveCommand(focusedObject, MoveCommand.DIRECTION_UP));
                             e.consume();
                             break;
                         case KeyEvent.VK_LEFT:
-                            focusedObject.move(GameObject.DIRECTION_LEFT);
+                            map.execute(new MoveCommand(focusedObject, MoveCommand.DIRECTION_LEFT));
                             e.consume();
                             break;
                         case KeyEvent.VK_RIGHT:
-                            focusedObject.move(GameObject.DIRECTION_RIGHT);
+                            map.execute(new MoveCommand(focusedObject, MoveCommand.DIRECTION_RIGHT));
                             e.consume();
                             break;
                         case KeyEvent.VK_SPACE:

@@ -21,7 +21,7 @@ public class Service extends Thread {
             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
             while (true) {
                 Command command = (Command) input.readObject();
-                output.writeObject(map.execute(command));
+                map.execute(command);
                 output.flush();
                 output.reset();
             }
