@@ -7,21 +7,24 @@ public class GameMap {
     /* The pixel size of a map block (both x and y ways) */
     public static final int MAP_BLOCK_SIZE = 10;
 
-    private static final int BACKGROUND[][] = {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    private static final MapBlock r = new MapBlock(MapBlock.TYPE_ROAD);
+    private static final MapBlock w = new MapBlock(MapBlock.TYPE_WALL);
+
+    private static final MapBlock BLOCKS[][] = {
+        {w, w, w, w, w, w, w, w, w, w, w, w, w},
+        {w, r, w, w, w, w, w, r, r, r, r, r, w},
+        {w, r, w, w, w, r, r, r, w, w, w, r, w},
+        {w, r, w, w, w, r, w, r, w, w, w, r, w},
+        {w, r, w, w, w, r, w, r, w, w, w, r, w},
+        {w, r, w, w, w, r, w, r, w, w, w, r, w},
+        {w, r, w, w, w, r, w, r, w, w, w, r, w},
+        {w, r, w, w, w, r, w, r, w, w, w, r, w},
+        {w, r, r, r, r, r, w, r, w, w, w, r, w},
+        {w, r, w, r, w, w, w, r, w, w, w, r, w},
+        {w, r, w, r, w, w, w, r, w, w, w, r, w},
+        {w, r, w, r, w, w, w, r, w, w, w, r, w},
+        {w, r, r, r, r, r, r, r, r, r, r, r, w},
+        {w, w, w, w, w, w, w, w, w, w, w, w, w}};
 
     private Set mapChangeListeners = new HashSet();
 
@@ -68,7 +71,7 @@ public class GameMap {
     }
 
     public int getHeight() {
-        return BACKGROUND.length;
+        return BLOCKS.length;
     }
 
     public int getPixelHeight() {
@@ -80,7 +83,7 @@ public class GameMap {
     }
 
     public int getWidth() {
-        return BACKGROUND[0].length;
+        return BLOCKS[0].length;
     }
 
     public void paint(Graphics g) {
@@ -94,9 +97,9 @@ public class GameMap {
 
     private void paintBackground(Graphics g) {
 
-        for (int y = 0; y < BACKGROUND.length; y++) {
-            for (int x = 0; x < BACKGROUND[y].length; x++) {
-                if (BACKGROUND[y][x] == 1) {
+        for (int y = 0; y < BLOCKS.length; y++) {
+            for (int x = 0; x < BLOCKS[y].length; x++) {
+                if (BLOCKS[y][x].getType() == MapBlock.TYPE_WALL) {
                     g.setColor(Color.black);
                 } else {
                     g.setColor(Color.white);
@@ -118,10 +121,10 @@ public class GameMap {
     }
 
     protected boolean isVisitablePosition(int x, int y) {
-        if (x < 0 || y < 0 || y >= BACKGROUND.length || x >= BACKGROUND[0].length) {
+        if (x < 0 || y < 0 || y >= BLOCKS.length || x >= BLOCKS[0].length) {
             return false;
         }
-        return BACKGROUND[y][x] == 0;
+        return BLOCKS[y][x].isVisitable();
     }
 
     private void fireMovedEvent(GameObject object, int direction, MapPosition oldPosition) {
