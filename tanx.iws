@@ -1,35 +1,37 @@
 <project version="2" relativePaths="false">
   <component name="FileEditorManager">
     <history>
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/server/Service.java" line="22" column="16" vertical_scroll_position="0.5198556" horizontal_scroll_position="0.16470589" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/Main.java" line="13" column="13" vertical_scroll_position="0.3465704" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/TanxFrame.java" line="8" column="13" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Command.java" line="4" column="22" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.22647059" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameMap.java" line="4" column="13" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameObject.java" line="21" column="0" vertical_scroll_position="0.6064982" horizontal_scroll_position="0.0" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapChangeListener.java" line="3" column="17" vertical_scroll_position="0.0866426" horizontal_scroll_position="0.175" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapPosition.java" line="4" column="13" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapBlock.java" line="4" column="13" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MoveCommand.java" line="2" column="13" vertical_scroll_position="0.057761732" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Shot.java" line="16" column="5" vertical_scroll_position="0.46209386" horizontal_scroll_position="0.05147059" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Tank.java" line="9" column="0" vertical_scroll_position="0.2599278" horizontal_scroll_position="0.0" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/GameObjectView.java" line="17" column="20" vertical_scroll_position="0.49097472" horizontal_scroll_position="0.20588236" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/MapView.java" line="93" column="29" vertical_scroll_position="0.71119136" horizontal_scroll_position="0.29852942" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/MapView.java" line="9" column="0" vertical_scroll_position="0.28070176" horizontal_scroll_position="0.0" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapChangeListener.java" line="5" column="28" vertical_scroll_position="0.14440434" horizontal_scroll_position="0.2882353" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Shot.java" line="20" column="37" vertical_scroll_position="0.49812734" horizontal_scroll_position="0.38088235" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/server/Server.java" line="12" column="11" vertical_scroll_position="0.23970038" horizontal_scroll_position="0.113235295" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/TanxFrame.java" line="36" column="26" vertical_scroll_position="0.5956679" horizontal_scroll_position="0.26764706" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameMap.java" line="26" column="0" vertical_scroll_position="0.1768953" horizontal_scroll_position="0.0" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/client/Connection.java" line="38" column="54" vertical_scroll_position="0.24909747" horizontal_scroll_position="0.55588233" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MoveCommand.java" line="2" column="36" vertical_scroll_position="0.057761732" horizontal_scroll_position="0.37058824" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Command.java" line="29" column="1" vertical_scroll_position="0.7978339" horizontal_scroll_position="0.010294118" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/client/ClientMap.java" line="12" column="0" vertical_scroll_position="0.3465704" horizontal_scroll_position="0.0" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/server/Service.java" line="44" column="37" vertical_scroll_position="0.6191336" horizontal_scroll_position="0.38088235" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapChangedEvent.java" line="4" column="53" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.54558825" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameObject.java" line="11" column="19" vertical_scroll_position="0.31768954" horizontal_scroll_position="0.19558823" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapPosition.java" line="6" column="49" vertical_scroll_position="0.1732852" horizontal_scroll_position="0.50441176" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/Main.java" line="31" column="23" vertical_scroll_position="0.80866426" horizontal_scroll_position="0.2367647" />
     </history>
     <open_files>
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameMap.java" line="4" column="13" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/MapView.java" line="93" column="29" vertical_scroll_position="0.71119136" horizontal_scroll_position="0.29852942" selected="true" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/view/GameObjectView.java" line="17" column="20" vertical_scroll_position="0.49097472" horizontal_scroll_position="0.20588236" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapBlock.java" line="4" column="13" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MoveCommand.java" line="2" column="13" vertical_scroll_position="0.057761732" horizontal_scroll_position="0.13382353" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameObject.java" line="21" column="0" vertical_scroll_position="0.6064982" horizontal_scroll_position="0.0" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Shot.java" line="16" column="5" vertical_scroll_position="0.46209386" horizontal_scroll_position="0.05147059" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Tank.java" line="9" column="0" vertical_scroll_position="0.2599278" horizontal_scroll_position="0.0" />
-      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Command.java" line="4" column="22" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.22647059" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameMap.java" line="26" column="0" vertical_scroll_position="0.1768953" horizontal_scroll_position="0.0" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/client/ClientMap.java" line="12" column="0" vertical_scroll_position="0.3465704" horizontal_scroll_position="0.0" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/Main.java" line="31" column="23" vertical_scroll_position="0.80866426" horizontal_scroll_position="0.2367647" selected="true" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapChangedEvent.java" line="4" column="53" vertical_scroll_position="0.115523465" horizontal_scroll_position="0.54558825" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/GameObject.java" line="11" column="19" vertical_scroll_position="0.31768954" horizontal_scroll_position="0.19558823" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MapPosition.java" line="6" column="49" vertical_scroll_position="0.1732852" horizontal_scroll_position="0.50441176" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/MoveCommand.java" line="2" column="36" vertical_scroll_position="0.057761732" horizontal_scroll_position="0.37058824" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/model/Command.java" line="29" column="1" vertical_scroll_position="0.7978339" horizontal_scroll_position="0.010294118" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/client/Connection.java" line="38" column="54" vertical_scroll_position="0.24909747" horizontal_scroll_position="0.55588233" />
+      <source_position_entry url="file://$PROJECT_DIR$/src/tanx/server/Service.java" line="44" column="37" vertical_scroll_position="0.6191336" horizontal_scroll_position="0.38088235" />
     </open_files>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1024" y="0" width="1024" height="740" extended-state="6" />
+    <frame x="0" y="0" width="1024" height="740" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="sliding" type="sliding" visible="false" weight="0.33" order="6" />
@@ -152,11 +154,12 @@
     <navigator currentView="SourcepathPane" flattenPackages="false" showMembers="false" showStructure="false" autoscrollToSource="false" splitterProportion="0.5" />
     <view id="ProjectPane" />
     <view id="SourcepathPane">
-      <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx/view" />
-      <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx" />
+      <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx/client" />
       <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx/server" />
+      <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx/view" />
       <expanded_node type="directory" url="file://$PROJECT_DIR$/src" />
       <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx/model" />
+      <expanded_node type="directory" url="file://$PROJECT_DIR$/src/tanx" />
     </view>
     <view id="ClasspathPane" />
   </component>

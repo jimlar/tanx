@@ -1,12 +1,14 @@
 package tanx.model;
 
+import java.io.Serializable;
 
-public abstract class GameObject {
+
+public abstract class GameObject implements Serializable {
     /**
      * Id in map
      */
     private Integer id;
-    private GameMap map;
+    private transient GameMap map;
     private MapPosition position = new MapPosition(0, 0);
 
     /**

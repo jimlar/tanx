@@ -13,6 +13,13 @@ public class MoveCommand extends Command {
         this.direction = direction;
     }
 
+    /**
+     * Create a move command which moves the default (focused) object. Usualy "my" tank.
+     */
+    public MoveCommand(int direction) {
+        this.direction = direction;
+    }
+
     public int getDirection() {
         return direction;
     }

@@ -44,15 +44,7 @@ public class MapView extends Canvas implements MapChangeListener {
         return new Dimension(getPixelWidth(), getPixelHeight());
     }
 
-    public void moved(GameObject object, int direction, MapPosition oldPosition) {
-        repaint();
-    }
-
-    public void added(GameObject object) {
-        repaint();
-    }
-
-    public void removed(GameObject object) {
+    public void mapChanged(MapChangedEvent event) {
         repaint();
     }
 

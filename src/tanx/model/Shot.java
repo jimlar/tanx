@@ -18,7 +18,7 @@ public class Shot extends GameObject implements Runnable {
             boolean destroyed = false;
             while (!destroyed) {
                 Thread.sleep(MILLIS_PER_BLOCK);
-                destroyed = !getMap().execute(new MoveCommand(this, direction));
+                getMap().execute(new MoveCommand(this, direction));
             }
         } catch (InterruptedException e) {
             System.out.println("Shot thread interrupted");

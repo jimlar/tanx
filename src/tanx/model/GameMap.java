@@ -24,8 +24,6 @@ public class GameMap {
 
     private Set mapChangeListeners = new HashSet();
 
-    /* this is the object which has input focus */
-    private GameObject focusedObject;
     private Map objectsById = new HashMap();
 
     private int nextObjectId = 1;
@@ -47,23 +45,14 @@ public class GameMap {
         fireRemovedEvent(object);
     }
 
-    public boolean execute(Command command) {
+    public void execute(Command command) {
         if (command instanceof MoveCommand) {
             MoveCommand moveCommand = (MoveCommand) command;
-            MapPosition oldPos = moveCommand.getTarget(this).getMapPosition();
             boolean result = moveCommand.getTarget(this).move(moveCommand.getDirection());
-            fireMovedEvent(moveCommand.getTarget(this), moveCommand.getDirection(), oldPos);
-            return result;
+            if (result) {
+             fireMovedEvent(moveCommand.getTarget(this), moveCommand.getDirection());
+            }
         }
-        return false;
-    }
-
-    public GameObject getFocusedObject() {
-        return this.focusedObject;
-    }
-
-    public void setFocusedObject(GameObject focusedObject) {
-        this.focusedObject = focusedObject;
     }
 
     public int getHeight() {
@@ -89,24 +78,24 @@ public class GameMap {
         return BLOCKS[y][x].isVisitable();
     }
 
-    private void fireMovedEvent(GameObject object, int direction, MapPosition oldPosition) {
+    private void fireMovedEvent(GameObject object, int direction) {
         for (Iterator i = mapChangeListeners.iterator(); i.hasNext();) {
             MapChangeListener listener = (MapChangeListener) i.next();
-            listener.moved(object, direction, oldPosition);
+            listener.mapChanged(MapChangedEvent.createMovedEvent(object, direction));
         }
     }
 
     private void fireRemovedEvent(GameObject object) {
         for (Iterator i = mapChangeListeners.iterator(); i.hasNext();) {
             MapChangeListener listener = (MapChangeListener) i.next();
-            listener.removed(object);
+            listener.mapChanged(MapChangedEvent.createRemovedEvent(object));
         }
     }
 
     private void fireAddedEvent(GameObject object) {
         for (Iterator i = mapChangeListeners.iterator(); i.hasNext();) {
             MapChangeListener listener = (MapChangeListener) i.next();
-            listener.added(object);
+            listener.mapChanged(MapChangedEvent.createAddedEvent(object));
         }
     }
 
