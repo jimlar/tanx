@@ -14,7 +14,7 @@ public class Main {
     public static void main(String args[]) throws Exception {
         GameMap map = new GameMap();
         Tank tank = new Tank();
-        tank.setMapPosition(new MapPosition(10, 10));
+        tank.setMapPosition(new MapPosition(1, 1));
         map.add(tank);
         map.setFocusedObject(tank);
 

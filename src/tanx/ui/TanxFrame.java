@@ -13,7 +13,7 @@ public class TanxFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().add(new GameCanvas(map));
 
-        setSize(300, 200);
+        pack();
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -34,6 +34,10 @@ public class TanxFrame extends JFrame {
                             break;
                         case KeyEvent.VK_RIGHT:
                             focusedObject.move(GameObject.DIRECTION_RIGHT);
+                            e.consume();
+                            break;
+                        case KeyEvent.VK_SPACE:
+                            focusedObject.action();
                             e.consume();
                             break;
                     }

@@ -3,18 +3,23 @@ package tanx.model;
 import java.awt.*;
 
 public class Tank extends GameObject {
-    private static final int WIDTH = 10;
-    private static final int HEIGHT = 10;
-    private static final int CANNON_LENGTH = 10;
+    private static final int WIDTH = GameMap.MAP_BLOCK_SIZE;
+    private static final int HEIGHT = GameMap.MAP_BLOCK_SIZE;
+    private static final int CANNON_LENGTH = GameMap.MAP_BLOCK_SIZE;
 
     private int facingDirection = DIRECTION_RIGHT;
 
-    public void move(int direction) {
+    public void action() {
+        map.add(new Shot(position, facingDirection));
+    }
+
+    public boolean move(int direction) {
         if (direction == facingDirection) {
-            super.move(direction);
+            return super.move(direction);
         } else {
             this.facingDirection = direction;
             fireMovedEvent(this, direction, this.position);
+            return true;
         }
     }
 
