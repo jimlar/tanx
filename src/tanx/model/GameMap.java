@@ -2,9 +2,8 @@ package tanx.model;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
-public class GameMap implements MoveListener {
+public class GameMap {
     /* The pixel size of a map block (both x and y ways) */
     public static final int MAP_BLOCK_SIZE = 10;
 
@@ -28,22 +27,23 @@ public class GameMap implements MoveListener {
 
     /* this is the object which has input focus */
     private GameObject focusedObject;
-    private List objects = new ArrayList();
+    private Map objectsById = new HashMap();
+
+    private int nextObjectId = 1;
 
     public void addMapChangeListener(MapChangeListener listener) {
         mapChangeListeners.add(listener);
     }
 
     public void add(GameObject object) {
-        objects.add(object);
-        object.addMoveListener(this);
+        object.setId(getNextObjectId());
+        objectsById.put(object.getId(), object);
         object.setMap(this);
         fireAddedEvent(object);
     }
 
     public void remove(GameObject object) {
-        objects.remove(object);
-        object.removeMoveListener(this);
+        objectsById.remove(object.getId());
         object.setMap(null);
         fireRemovedEvent(object);
     }
@@ -51,13 +51,12 @@ public class GameMap implements MoveListener {
     public boolean execute(Command command) {
         if (command instanceof MoveCommand) {
             MoveCommand moveCommand = (MoveCommand) command;
-            return moveCommand.getTarget().move(moveCommand.getDirection());
+            MapPosition oldPos = moveCommand.getTarget(this).getMapPosition();
+            boolean result = moveCommand.getTarget(this).move(moveCommand.getDirection());
+            fireMovedEvent(moveCommand.getTarget(this), moveCommand.getDirection(), oldPos);
+            return result;
         }
         return false;
-    }
-
-    public List getObjects() {
-        return objects;
     }
 
     public GameObject getFocusedObject() {
@@ -84,23 +83,13 @@ public class GameMap implements MoveListener {
         return BACKGROUND[0].length;
     }
 
-    public boolean isOutsideMap(MapPosition position) {
-        return !containsPosition(position);
-    }
-
-    public boolean containsPosition(MapPosition position) {
-        if (position.getX() < 0 || position.getX() > getWidth() - 1) {
-            return false;
-        }
-        if (position.getY() < 0 || position.getY() > getHeight() - 1) {
-            return false;
-        }
-        return true;
-    }
-
     public void paint(Graphics g) {
         paintBackground(g);
         paintObjects(g);
+    }
+
+    private synchronized Integer getNextObjectId() {
+        return new Integer(nextObjectId++);
     }
 
     private void paintBackground(Graphics g) {
@@ -122,14 +111,10 @@ public class GameMap implements MoveListener {
     }
 
     private void paintObjects(Graphics g) {
-        for (Iterator i = objects.iterator(); i.hasNext();) {
+        for (Iterator i = objectsById.values().iterator(); i.hasNext();) {
             GameObject gameObject = (GameObject) i.next();
             gameObject.paint(g);
         }
-    }
-
-    public void moved(GameObject object, int direction, MapPosition oldPosition) {
-        fireMovedEvent(object, direction, oldPosition);
     }
 
     protected boolean isVisitablePosition(int x, int y) {
@@ -158,5 +143,13 @@ public class GameMap implements MoveListener {
             MapChangeListener listener = (MapChangeListener) i.next();
             listener.added(object);
         }
+    }
+
+    public GameObject getObjectById(Integer id) {
+        GameObject object = (GameObject) objectsById.get(id);
+        if (object == null) {
+            throw new IllegalArgumentException("no object with id " + id);
+        }
+        return object;
     }
 }

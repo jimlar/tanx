@@ -14,7 +14,7 @@ public class Tank extends GameObject {
     }
 
     public void action() {
-        map.add(new Shot(getMapPosition(), facingDirection));
+        getMap().add(new Shot(getMapPosition(), facingDirection));
     }
 
     public boolean move(int direction) {
@@ -22,7 +22,6 @@ public class Tank extends GameObject {
             return super.move(direction);
         } else {
             this.facingDirection = direction;
-            fireMovedEvent(this, direction, getMapPosition());
             return true;
         }
     }

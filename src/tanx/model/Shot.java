@@ -20,12 +20,12 @@ public class Shot extends GameObject implements Runnable {
             boolean destroyed = false;
             while (!destroyed) {
                 Thread.sleep(MILLIS_PER_BLOCK);
-                destroyed = !map.execute(new MoveCommand(this, direction));
+                destroyed = !getMap().execute(new MoveCommand(this, direction));
             }
         } catch (InterruptedException e) {
             System.out.println("Shot thread interrupted");
         }
-        map.remove(this);
+        getMap().remove(this);
     }
 
     public void paint(Graphics g) {

@@ -6,16 +6,11 @@ public class MoveCommand extends Command {
     public static final int DIRECTION_LEFT = 2;
     public static final int DIRECTION_RIGHT = 3;
 
-    private GameObject target;
     private int direction;
 
     public MoveCommand(GameObject target, int direction) {
-        this.target = target;
+        super(target);
         this.direction = direction;
-    }
-
-    public GameObject getTarget() {
-        return target;
     }
 
     public int getDirection() {

@@ -1,28 +1,19 @@
 package tanx.model;
 
 import java.awt.*;
-import java.util.*;
 
 public abstract class GameObject {
-    private Set moveListeners = new HashSet();
-    protected GameMap map;
-    protected MapPosition position = new MapPosition(0, 0);
+    /**
+     * Id in map
+     */
+    private Integer id;
+    private GameMap map;
+    private MapPosition position = new MapPosition(0, 0);
 
-    public void addMoveListener(MoveListener listener) {
-        moveListeners.add(listener);
-    }
-
-    public void removeMoveListener(MoveListener listener) {
-        moveListeners.remove(listener);
-    }
-
-    public MapPosition getMapPosition() {
-        return this.position;
-    }
-
-    public void setMapPosition(MapPosition position) {
-        this.position = position;
-    }
+    /**
+     * Implement to paint this object
+     */
+    protected abstract void paint(Graphics g);
 
     /**
      * Implements a default action behaviour
@@ -30,8 +21,6 @@ public abstract class GameObject {
      */
     public void action() {
     }
-
-    protected abstract void paint(Graphics g);
 
     /**
      * Implements a default move behaviour
@@ -45,7 +34,6 @@ public abstract class GameObject {
             return false;
         }
 
-        MapPosition oldPosition = this.position;
         switch (direction) {
             case MoveCommand.DIRECTION_UP:
                 this.position = new MapPosition(position.getX(), position.getY() - 1);
@@ -62,15 +50,27 @@ public abstract class GameObject {
             default:
                 throw new IllegalArgumentException("invalid direction " + direction);
         }
-        fireMovedEvent(this, direction, oldPosition);
         return true;
     }
 
-    protected void fireMovedEvent(GameObject gameObject, int direction, MapPosition oldPosition) {
-        for (Iterator i = moveListeners.iterator(); i.hasNext();) {
-            MoveListener listener = (MoveListener) i.next();
-            listener.moved(gameObject, direction, oldPosition);
-        }
+    protected Integer getId() {
+        return id;
+    }
+
+    protected void setId(Integer id) {
+        this.id = id;
+    }
+
+    protected MapPosition getMapPosition() {
+        return this.position;
+    }
+
+    protected void setMapPosition(MapPosition position) {
+        this.position = position;
+    }
+
+    protected GameMap getMap() {
+        return map;
     }
 
     protected void setMap(GameMap map) {
