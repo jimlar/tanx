@@ -3,6 +3,7 @@ package tanx;
 import tanx.ui.TanxFrame;
 import tanx.model.GameMap;
 import tanx.model.Tank;
+import tanx.model.MapPosition;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
@@ -13,7 +14,7 @@ public class Main {
     public static void main(String args[]) throws Exception {
         GameMap map = new GameMap();
         Tank tank = new Tank();
-        tank.setBounds(new Rectangle(10, 10, 10, 10));
+        tank.setMapPosition(new MapPosition(10, 10));
         map.add(tank);
         map.setFocusedObject(tank);
 

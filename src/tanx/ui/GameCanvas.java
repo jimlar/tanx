@@ -3,6 +3,7 @@ package tanx.ui;
 import tanx.model.GameMap;
 import tanx.model.GameObject;
 import tanx.model.MoveListener;
+import tanx.model.MapPosition;
 
 import java.awt.*;
 
@@ -18,7 +19,7 @@ public class GameCanvas extends Canvas implements MoveListener {
         map.paint(g);
     }
 
-    public void moved(GameObject object, Rectangle oldBounds, Rectangle newBounds) {
+    public void moved(GameObject object, int direction, MapPosition oldPosition) {
         repaint();
     }
 }

@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.awt.*;
 
 public class GameMap extends GameObject implements MoveListener {
+    /* The pixel size of a map block (both x and y ways) */
+    public static final int MAP_BLOCK_SIZE = 5;
+
     /* this is the object which has input focus */
     private GameObject focusedObject;
     private List objects = new ArrayList();
@@ -34,7 +37,7 @@ public class GameMap extends GameObject implements MoveListener {
         }
     }
 
-    public void moved(GameObject object, Rectangle oldBounds, Rectangle newBounds) {
-        fireMovedEvent(object, oldBounds, newBounds);
+    public void moved(GameObject object, int direction, MapPosition oldPosition) {
+        fireMovedEvent(object, direction, oldPosition);
     }
 }

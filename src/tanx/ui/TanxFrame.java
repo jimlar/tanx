@@ -21,16 +21,20 @@ public class TanxFrame extends JFrame {
                 if (focusedObject != null) {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_DOWN:
-                            focusedObject.moveDown();
+                            focusedObject.move(GameObject.DIRECTION_DOWN);
+                            e.consume();
                             break;
                         case KeyEvent.VK_UP:
-                            focusedObject.moveUp();
+                            focusedObject.move(GameObject.DIRECTION_UP);
+                            e.consume();
                             break;
                         case KeyEvent.VK_LEFT:
-                            focusedObject.moveLeft();
+                            focusedObject.move(GameObject.DIRECTION_LEFT);
+                            e.consume();
                             break;
                         case KeyEvent.VK_RIGHT:
-                            focusedObject.moveRight();
+                            focusedObject.move(GameObject.DIRECTION_RIGHT);
+                            e.consume();
                             break;
                     }
                 }
