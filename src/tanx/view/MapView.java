@@ -91,15 +91,7 @@ public class MapView extends Canvas implements MapChangeListener {
         for (Iterator i = map.getObjects().iterator(); i.hasNext();) {
             GameObject gameObject = (GameObject) i.next();
 
-            if (gameObject instanceof Tank) {
-                TankView.paint((Tank) gameObject, g);
-
-            } else if (gameObject instanceof Shot) {
-                ShotView.paint((Shot) gameObject, g);
-
-            } else {
-                throw new IllegalStateException("unknown type" + gameObject.getClass());
-            }
+            GameObjectView.paintObject(gameObject, g);
         }
     }
 }
